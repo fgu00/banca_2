@@ -51,11 +51,12 @@ public class codice {
         a[34]="k";
         a[35]="x";
     }
-    public void genera(){
+    public String genera(){
         String g="";
         for(int s=0;s<6;s++){
      int b=(int)(Math.random()*36);
      g=g+a[b];
         }
+        return g;
     }
 }

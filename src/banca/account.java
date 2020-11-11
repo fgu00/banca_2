@@ -20,6 +20,8 @@ public class account {
     private String[] a;
     private String []b;
     private boolean attiva;
+    private codice f;
+    private String codice;
     
     public  account(String nome,String cognome,String mail,int telefono,String password,String login){
      this.nome=nome;  
@@ -31,6 +33,8 @@ public class account {
      a=new String [10];
      b=new String [1];
      attiva=false;
+     f=new codice();
+     codice=f.genera();
     }
     public void aggiungi(int a){
         if(attiva==true){
