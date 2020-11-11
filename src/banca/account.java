@@ -209,4 +209,7 @@ public class account {
             System.out.println("codice sbagnato riprovare");
         }
     }
+    public String codice(){
+        return codice;
+    }
 }
