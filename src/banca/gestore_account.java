@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package banca;
+package banca_2;
 
 import java.io.File;
+  import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
-
 /**
  *
  * @author super
@@ -43,12 +44,30 @@ public class gestore_account {
                 
                 
    }
-   public void attiva(){
-       MIneMessage tt=new MineMessage();
+   public void attiva() throws IOException{
+       int jj=0;
+      // MIneMessage tt=new MineMessage();
             System.out.println("inserisci il codice");
                 String bb=sc.next();
-                t[p].attiva(bb);
-                File m=new File();
+                for(int p=0;p<t.length;p++){
+                    try{
+                      t[p].attiva(bb);
+                      jj=p;
+                    }catch(Exception n){
+                        boolean nn=false;
+                        while(nn==false){
+                            System.out.println("inserisci il codice");
+                            bb=sc.next();
+                        t[p].attiva(bb);
+                        jj=p;
+                        }
+                    }
+                }
+                String patrh="C:\\Users\\russo.salvatore\\Desktop\\account_banca";
+                File m=new File(patrh+"\\"+t[jj].getLogin()+"_"+t[jj].getPassword()+"_"+t[jj].getCodice());
+                m.createNewFile();
            }
+   }
    
-}
+  
+
