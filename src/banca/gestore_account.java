@@ -28,7 +28,7 @@ public class gestore_account {
                 System.out.println("inserisci la tua mail");
                 String z=sc.next();
                 System.out.println("inserisci il tuo numero di telefono");
-                int v=sc.nextInt();
+                String v=sc.next();
                 System.out.println("inserisci un login");
                 String x=sc.next();
                 System.out.println("inserisci una password");

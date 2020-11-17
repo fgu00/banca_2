@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package banca;
+package banca_2;
 
 /**
  *
- * @author super
+ * @author russo.salvatore
  */
 public class account {
-    private int soldi;
+      private int soldi;
     private String nome;
     private String cognome;
     private String mail;
-    private int telefono;
+    private String telefono;
     private String password;
     private String login;
     private String[] a;
@@ -23,7 +23,7 @@ public class account {
     private codice f;
     private String codice;
     
-    public  account(String nome,String cognome,String mail,int telefono,String password,String login){
+    public  account(String nome,String cognome,String mail,String telefono,String password,String login){
      this.nome=nome;  
      this.cognome=cognome;
      this.mail=mail;
@@ -103,7 +103,7 @@ public class account {
               System.out.println("account non attivato");
          }
      }
-    public String getMaio(){
+    public String getMail(){
         if(attiva==true){
         return mail;
     }else{
@@ -111,22 +111,22 @@ public class account {
         }
         return null;
 }
-     public void setTelefono(int  a){
+     public void setTelefono(String  a){
          if(attiva==true){
-         int h=telefono;
+         String h=telefono;
         telefono=a;
         b[0]="si è cambiato numero di telefono da "+h+" a "+a;
          }else{
               System.out.println("account non attivato");
          }
     }
-    public int getTelefono(){
+    public String getTelefono(){
         if(attiva==true){
         return telefono;
     }else{
              System.out.println("account non attivato");
         }
-        return 0;
+        return null;
     }
      public void setPassword(String  a){
          if(attiva==true){
@@ -144,6 +144,10 @@ public class account {
              System.out.println("account non attivato");
         }  
         return null;
+    }
+    public String getCodice(){
+          return codice;
+        
     }
      public void setlogin(String  a){
          if(attiva==true){
@@ -213,3 +217,5 @@ public class account {
         return codice;
     }
 }
+
+
