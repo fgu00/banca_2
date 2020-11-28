@@ -68,7 +68,7 @@ public class gestore_account {
           System.out.println("aggiungi percorso");
                     String s="C:\\Users\\super\\OneDrive\\Desktop\\account_bamca";
                     String h=t[jj].getLogin()+"_"+t[jj].getPassword()+"_"+t[jj].codice();
-                    File m=new File(s+"\\"+h);
+                    File m=new File(s+"\\"+h+".txt");
             {
                 try {
                     m.createNewFile();
@@ -146,6 +146,8 @@ public class gestore_account {
                         break;
                     case 8:
                         bu1=true;
+                        vb=true;
+                        u=t.length;
                         break;
             }   
    }
@@ -254,21 +256,35 @@ public class gestore_account {
    public void salva() throws IOException{
        for(int fd=0;fd<t.length;fd++){
            if(t[fd]!=null){
-           File file=new File("C:\\Users\\super\\OneDrive\\Desktop\\account_bamca"+"\\"+t[fd].getLogin()+"_"+t[fd].getPassword()+"_"+t[fd].codice());
+           File file=new File("C:\\Users\\super\\OneDrive\\Desktop\\account_bamca"+"\\"+t[fd].getLogin()+"_"+t[fd].getPassword()+"_"+t[fd].codice()+".txt");
            FileWriter fw=new FileWriter(file);
            fw.write(t[fd].getNome());
+           fw.write("\n");
            fw.write(t[fd].getCognome());
+           fw.write("\n");
            fw.write(t[fd].getMaio());
+           fw.write("\n");
            fw.write(t[fd].getTelefono());
+           fw.write("\n");
            fw.write(t[fd].getLogin());
+           fw.write("\n");
            fw.write(t[fd].getPassword());
-           fw.write(t[fd].soldi());
+           fw.write("\n");
+           String soldi="";
+           soldi=soldi+t[fd].soldi();
+           fw.write(soldi);
+           fw.write("\n");
            fw.write(t[fd].codice());
+           fw.write("\n");
             fw.write(t[fd].getAttiva());
+            fw.write("\n");
             a=t[fd].ritornocronologia();
             for(int bb=0;bb<a.size();bb++){
-               fw.write(a.get(bb));  
+               fw.write(a.get(bb));
+               fw.write("\n");
             }
+              fw.flush();
+              fw.close();
        }
    }
 }

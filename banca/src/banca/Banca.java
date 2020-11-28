@@ -22,5 +22,6 @@ public class Banca {
         a.genera_account();
         a.attiva();
         a.modifica();
+        a.salva();
 }
 }

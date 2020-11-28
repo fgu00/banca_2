@@ -41,6 +41,7 @@ public class account {
      f=new codice();
      f.genera();
      codice=f.getcodice();
+     soldi=0;
     }
      public  account(String nome,String cognome,String mail,String telefono,String password,String login,boolean attiva,String codice){
      this.nome=nome;  
