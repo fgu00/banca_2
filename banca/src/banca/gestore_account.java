@@ -6,6 +6,8 @@
 package banca;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -22,7 +24,7 @@ public class gestore_account {
     private int p=0;
     ArrayList<String> a;
    public void gestore_account(){
-       t=new account[20];
+      // t=new account[20];
        a=new ArrayList<String>();
    }
    public void genera_account(){
@@ -80,18 +82,7 @@ public class gestore_account {
                
       
            }
-   public void modifica(){  
-       int j=0;
-     boolean vb=false;
-                while(vb==false){
-                    System.out.println("inserire login");
-                    String sd=sc.next();
-                    System.out.println("inserire password");
-                    String bh=sc.next();
-                    for(int u=0;u<t.length;u++){
-                        if(t[0]!=null){
-                        if(sd.equals(t[0].getLogin()) && bh.equals(t[0].getPassword())){
-                            j=u;
+   public void modifica(int u){  
                           boolean bu1=false;
                 while(bu1==false){
                 System.out.println("1 per cambiare nome al intestato del conto");
@@ -136,7 +127,7 @@ public class gestore_account {
                          t[u].cronologia();
                         break; 
                     case 6:
-                        
+                        System.out.println("inserisci nuovo login");
                         String cv=sc.next();
                         t[u].setlogin(cv);
                          t[u].cronologia();
@@ -146,7 +137,6 @@ public class gestore_account {
                         break;
                     case 8:
                         bu1=true;
-                        vb=true;
                         u=t.length;
                         break;
             }   
@@ -154,40 +144,18 @@ public class gestore_account {
    
 
 }
-                    }
-                }
-   }
-}
-   public void azioni_banca(){
-       int j=0;
-       int conta=0;
-        boolean vb=false;
-                while(vb==false){
-                    if(conta==5){
-                        break;
-                    }
-                    System.out.println("inserire login");
-                    String sd=sc.next();
-                    System.out.println("inserire password");
-                    String bh=sc.next();
-                     for(int u=0;u<t.length;u++){
-                        if(t[0]!=null){
-                        if(sd.equals(t[0].getLogin()) && bh.equals(t[0].getPassword())){
-                            j=u;
-                          boolean bu1=false;
+                    
+                
+   
+
+   public void azioni_banca(int u){
+                boolean bu1=false;
                 while(bu1==false){
                 System.out.println("1 per depositare i soldi");
                 System.out.println("2 per ritirare i soldi");
-                System.out.println("3 per cambiare nome al intestato del conto");
-                System.out.println("4 per cambiare il cognome del interessato del conto");
-                    System.out.println("5 per cambiare la mail del conto");
-                    System.out.println("6 per cambiare il numero di telefono del conto");
-                    System.out.println("7 per cambbiare la password del conto");
-                    System.out.println("8 per cambiare il login del conto");
-                    System.out.println("9 per visualizzare la cronologia");
-                    System.out.println("10 per uscire ");
+                System.out.println("3 visualizzare i soldi");
+                System.out.println("4 per uscire");
                 int ww=sc.nextInt();
-                
                 switch(ww){
                     case 1:
                         System.out.println("inserire numero soldi da depositare");
@@ -202,61 +170,25 @@ public class gestore_account {
                          t[u].cronologia();
                         break;
                     case 3:
-                        System.out.println("inserire nuovo nome");
-                        String nn=sc.next();
-                        t[u].setNome(nn);
-                         t[u].cronologia();
+                        System.out.println(t[u].soldi());
                         break;
                     case 4:
-                         System.out.println("inserire nuovo cognome");
-                        String nj=sc.next();
-                        t[u].setCognome(nj);
-                         t[u].cronologia();
-                        break;
-                    case 5:
-                         System.out.println("inserire nuova mail");
-                        String nk=sc.next();
-                        t[u].setMail(nk);
-                         t[u].cronologia();
-                        break;
-                    case 6:
-                         System.out.println("inserire nuovo numero telefonico");
-                        String xc=sc.next();
-                        t[u].setTelefono(xc);
-                         t[u].cronologia();
-                        break;
-                    case 7:
-                         System.out.println("inserire nuova password");
-                       String xe=sc.next();
-                        t[u].setPassword(xe);
-                         t[u].cronologia();
-                        break; 
-                    case 8:
-                        
-                        String cv=sc.next();
-                        t[u].setlogin(cv);
-                         t[u].cronologia();
-                        break;
-                    case 9:
-                       t[u].stampagronologia();
-                        break;
-                    case 10:
                         bu1=true;
                         break;
             }   
-   }
-}else{
-                            conta++;
-                        }
-                        }
-                     }
+   
+
+                        
+                        
+                     
                 }
    }
+   
    //quando creare gli account da i file ricordarsi attiva e una stringa e davi trasformarla in un boolean
    public void salva() throws IOException{
        for(int fd=0;fd<t.length;fd++){
            if(t[fd]!=null){
-           File file=new File("C:\\Users\\super\\OneDrive\\Desktop\\account_bamca"+"\\"+t[fd].getLogin()+"_"+t[fd].getPassword()+"_"+t[fd].codice()+".txt");
+           File file=new File("C:\\Users\\super\\OneDrive\\Desktop\\account_bamca"+"\\"+t[fd].codice()+".txt");
            FileWriter fw=new FileWriter(file);
            fw.write(t[fd].getNome());
            fw.write("\n");
@@ -288,6 +220,118 @@ public class gestore_account {
        }
    }
 }
+   public void leggi() throws FileNotFoundException{
+      t=new account[20];
+       Scanner leggi;
+       File[]listafile;
+       File file=new File("C:\\Users\\super\\OneDrive\\Desktop\\account_bamca");  
+          listafile=file.listFiles();
+        for(int f=0;f<listafile.length;f++){
+            account prova;
+            boolean att;
+           leggi=new Scanner(listafile[f]);
+           String nome=leggi.nextLine();
+           String cognome=leggi.nextLine();
+           String mail=leggi.nextLine();
+           String telefono=leggi.nextLine();
+           String login=leggi.nextLine();
+           String password=leggi.nextLine();
+           int soldi=Integer.parseInt(leggi.nextLine());
+           String codice=leggi.nextLine();
+           String attivazione=leggi.nextLine();
+           if(attivazione.equals("attiva")){
+            att=true;   
+           }else{
+               att=false;
+           }
+           ArrayList<String>crono= new ArrayList<String>();
+           for(int hh=0;hh<1;){
+               if(leggi.hasNextLine()!=false){
+               String azione=leggi.nextLine();
+               crono.add(azione);
+           }else{
+                   hh++;
+               }
+        }
+           prova=new account(nome,cognome,mail,telefono,password,login,att,codice,soldi,crono);
+           t[f]=prova;
+          
+           
+   }
 }
+   public void stampaLista(){
+       for(int ss=0;ss<t.length;ss++){
+           System.out.println(t[ss].getNome());
+       }
+   }
+   public int login(){
+         int j=0;
+     boolean vb=false;
+                while(vb==false){
+                    System.out.println("inserire login");
+                    String sd=sc.next();
+                    System.out.println("inserire password");
+                    String bh=sc.next();
+                    System.out.println("inserisci codice");
+                    String codice2=sc.next();
+                    for(int u=0;u<t.length;u++){
+                        if(t[0]!=null){
+                        if(sd.equals(t[u].getLogin()) && bh.equals(t[u].getPassword())&& codice2.equals(t[u].codice())){
+                            j=u;
+                            vb=true;
+                            break;
+                        }
+}
+                    }
+                }
+      return j;
+   }
+   public void recupero(){
+       System.out.println("1 per recuperare il login e la password");
+       System.out.println("2 per recuperare il codice alfanumerico");
+       int recupero=sc.nextInt();
+       switch(recupero){
+           case 1:
+               System.out.println("inserire l'email");
+               String email=sc.next();
+               System.out.println("inserire il codice");
+               String codice=sc.next();
+               for(int u=0;u<t.length;u++){
+                        if(t[0]!=null){
+                        if(email.equals(t[u].getMaio()) && codice.equals(t[u].codice())){
+                            System.out.println(t[u].getLogin()); 
+                             System.out.println(t[u].getPassword()); 
+                             u=t.length;
+                            break;
+       }
+   }
+}
+           break;
+           case 2:
+            System.out.println("inserire il login");
+               String login=sc.next();
+               System.out.println("inserire la password");
+               String password=sc.next();
+               for(int u=0;u<t.length;u++){
+                        if(t[0]!=null){
+                        if(password.equals(t[u].getPassword()) && login.equals(t[u].getLogin())){
+                            System.out.println(t[u].codice()); 
+                             u=t.length;
+                            break;
+       }
+   }
+}   
+       }
+   }
+   public void crecartella(){
+     File file=new File("C:\\Users\\super\\OneDrive\\Desktop\\account_bamca");
+     if(file.exists()==false){
+         file.mkdir();
+     }
+   }
+}
+
+   
+
 
                      
